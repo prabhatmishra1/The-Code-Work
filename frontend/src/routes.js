@@ -18,9 +18,9 @@ export default new VueRouter({
             path: '/',
             name: 'Home',
             component: Home,
-            // meta: {
-            //     requiresLogin: true
-            // }
+            meta: {
+                requiresLogin: true
+            }
         },
 
         {
