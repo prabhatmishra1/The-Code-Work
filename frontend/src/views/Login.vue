@@ -78,8 +78,13 @@ export default {
       incorrectAuth: false,
     };
   },
+  created() {
+    if (!this.email) {
+      this.$router.push({ name: "auth" });
+    }
+  },
   methods: {
-    login() {
+    async login() {
       console.log(this.user);
       this.$store
         .dispatch("userLogin", {

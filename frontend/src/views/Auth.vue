@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { getAPI } from "../axios-api";
+//import { getAPI } from "../axios-api";
 export default {
   name: "auth",
   props: ["message"],
@@ -113,8 +113,8 @@ export default {
   methods: {
     async login() {
       (this.loading = true),
-        await getAPI
-          .post("/login/", {
+        this.$store
+          .dispatch("userVerify", {
             email: this.email,
             password: this.password,
           })
@@ -122,6 +122,7 @@ export default {
             this.$router.push({ name: "login", params: { email: this.email } });
           })
           .catch((err) => {
+            this.loading = false;
             console.log(err);
             this.incorrectAuth = true;
           });
