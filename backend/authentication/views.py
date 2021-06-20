@@ -29,7 +29,6 @@ class UserLoginView(APIView):
         password = reqeust.data.get("password")
         user = authenticate(email=email, password=password)
         if user:
-            reqeust.session['pk'] = user.pk
             print(user.code)
             if send_otp(user.mobile, user.code):
                 response = {
@@ -49,9 +48,6 @@ class VerifyOTPView(TokenObtainPairView):
 
     def post(self, request, *args, **kwargs):
         if request.data.get("code") and request.data.get("email"):
-            print("myotp", request.data.get("code"))
-            print("myotp", request.data.get("email"))
-            pk = request.session.get('pk')
             user = UserModel.objects.get(email=request.data.get("email"))
             print(user)
             if user:
